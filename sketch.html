@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <title>Etch-A-Sketch</title>
+<style>
+    #container {        
+        background-color: red;
+        height: 480px;
+        width: 480px;
+    }
+    body {
+       position: absolute;
+       top: 50%; left: 50%;
+       transform: translate(-50%, -50%);   
+       background-image:url("https://images2.alphacoders.com/238/thumb-1920-238870.jpg");    
+    }
+    #but1 {
+        text-align: center;        
+    }
+    p {
+        color:yellow;
+        font-weight:bolder;
+        font-size:20px;
+    }
+    
+    
+</style>
+</head>
+<body>
+
+    <p>Etch-A-Sketch</p>
+    <label style="color: green;" for="inp">Enter number of rows/columns</label>
+    <input type="number" id="inp" name="inp" min="2" max="100">
+    <p></p>
+    <div id="but1">
+        <button id="refreshbtn" style="font-weight: bold;" onclick="restoreColor()">REFRESH</button>
+    </div>
+    <div id="container"></div>
+  
+    <script>
+        
+        const inpNum = document.getElementById("inp");
+        let num = inpNum.value;
+        while (num > 100) {
+            alert("Must be 100 or less");
+            num = 0;
+        }  
+        
+
+        const container = document.getElementById("container");
+        container.style.display = "grid";
+        container.style.setProperty("--num", num);
+        container.style.gridTemplateColumns = "repeat(var(--num), auto)";  
+        container.style.gridTemplateRows = "repeat(var(--num), auto)";        
+                
+        for (let j = 0; j < num * num; j++) {
+            let el = document.createElement("div");
+            container.appendChild(el); 
+            el.className = "square";
+            el.style.cssFloat = "left";
+            el.style.border = "thin solid black";
+        }
+
+        const squares = Array.from(document.querySelectorAll(".square"));
+        squares.forEach(square => square.addEventListener("mouseover",sketch));
+
+        function sketch() {
+            this.style.backgroundColor = "blue";
+        }
+
+        function restoreColor() {
+            // squares.forEach(sq => sq.style.backgroundColor = "red"); -> changes each square's color to red if reload not used
+            location.reload();
+        }
+        
+        
+    </script>
+</body>
+</html>

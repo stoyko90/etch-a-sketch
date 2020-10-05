@@ -1,0 +1,1 @@
+Etch-A-Sketch project from Web 101 course under JavaScript Fullstack curriculum (TOP)
